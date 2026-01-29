@@ -1,6 +1,6 @@
 """
 Hệ thống nhận diện khuôn mặt và điểm danh tự động
-Sử dụng OpenCV và DeepFace (KHÔNG CẦN DLIB)
+Sử dụng OpenCV và DeepFace 
 """
 
 import cv2
