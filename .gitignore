@@ -1,0 +1,40 @@
+    # Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Face Recognition Data - IMPORTANT: Contains personal/sensitive data
+known_faces/
+face_embeddings.pkl
+*.pkl
+
+# Attendance Data - IMPORTANT: Contains personal information
+attendance.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
