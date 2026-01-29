@@ -12,7 +12,8 @@ ENV/
 env/
 
 # Face Recognition Data - IMPORTANT: Contains personal/sensitive data
-known_faces/
+known_faces/*
+!known_faces/.gitkeep
 face_embeddings.pkl
 *.pkl
 
