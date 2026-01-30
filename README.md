@@ -1,83 +1,141 @@
-# Face Recognition Attendance System
+# 🎯 Face Recognition Attendance System with Advanced Anti-Spoofing
 
-Hệ thống điểm danh tự động sử dụng công nghệ nhận diện khuôn mặt.
+Hệ thống điểm danh tự động sử dụng công nghệ nhận diện khuôn mặt với khả năng chống giả mạo nâng cao.
 
-## Tính năng
+## ✨ Tính năng
 
-- ✅ Nhận diện khuôn mặt real-time qua webcam
-- ✅ Tự động ghi điểm danh vào file CSV
-- ✅ Hỗ trợ nhiều ảnh cho mỗi người
-- ✅ Giao diện đơn giản, dễ sử dụng
+- ✅ **Nhận diện khuôn mặt** real-time qua webcam (DeepFace + FaceNet)
+- ✅ **Advanced Liveness Detection** - Chống video replay:
+  - 🎲 Random Challenge: Blink HOẶC Head Movement
+  - ↔️ 4 hướng xoay đầu ngẫu nhiên (Trái/Phải/Lên/Xuống)
+  - 📊 Texture Analysis tích hợp
+  - 🔐 MediaPipe Face Mesh tracking
+- ✅ **Hỗ trợ nhiều ảnh cho mỗi người** (user.jpg, user_1.jpg, user_2.jpg)
+- ✅ **Auto-cache embeddings** - Không cần xóa cache khi thêm ảnh mới
+- ✅ **Tự động ghi điểm danh** vào CSV với timestamp
 
-## Yêu cầu hệ thống
+## 🛡️ Bảo vệ khỏi
 
-- Python 3.7+
+- ✅ Ảnh in (printed photos)
+- ✅ Ảnh trên màn hình (screen display)
+- ✅ **Video replay** (kể cả video có nhấp nháy mắt)
+- ✅ Deep fake cơ bản
+
+## 📋 Yêu cầu hệ thống
+
+- Python 3.11+ (khuyến nghị)
 - Webcam
 - Windows/Linux/MacOS
+- RAM: 4GB+
+- CPU: Core i5 hoặc tương đương
 
-## Cài đặt
+## 🚀 Cài đặt
 
-1. Clone repository:
+### Phương pháp 1: Setup tự động (KHUYẾN NGHỊ)
+
+**Windows:**
+```cmd
+setup.bat
+```
+
+**Linux/Mac:**
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+Script sẽ tự động:
+- ✅ Kiểm tra Python 3.11+
+- ✅ Tạo virtual environment (.venv)
+- ✅ Cài đặt đúng phiên bản thư viện
+- ✅ Xác minh cài đặt thành công
+
+### Phương pháp 2: Setup thủ công
+
+**Bước 1:** Clone repository
 ```bash
 git clone https://github.com/nguyenhuuluan1702/face_attendance_system_project.git
 cd face_attendance_system_project
 ```
 
-2. Tạo môi trường ảo:
+**Bước 2:** Tạo môi trường ảo
 ```bash
 python -m venv .venv
 ```
 
-3. Kích hoạt môi trường ảo:
-- Windows:
-```bash
-.venv\Scripts\activate
+**Bước 3:** Kích hoạt môi trường ảo
+
+*Windows (CMD):*
+```cmd
+.venv\Scripts\activate.bat
 ```
-- Linux/Mac:
+
+*Windows (PowerShell):*
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+*Linux/Mac:*
 ```bash
 source .venv/bin/activate
 ```
 
-4. Cài đặt thư viện:
+**Bước 4:** Cài đặt thư viện
 ```bash
 pip install -r requirements.txt
 ```
 
-## Sử dụng
-
-1. Thêm ảnh khuôn mặt vào thư mục `known_faces/`:
-   - Tạo thư mục con theo tên người: `known_faces/TenNguoi/`
-   - Thêm ảnh: `known_faces/TenNguoi/anh1.jpg`, `anh2.jpg`, ...
-
-2. Chạy chương trình:
+**⚠️ Lưu ý quan trọng:**
+- Hệ thống yêu cầu **MediaPipe 0.10.9** và **TensorFlow 2.16.1**
+- Nếu gặp lỗi protobuf, chạy:
 ```bash
-python face_recognition_attendance.py
+pip install mediapipe==0.10.9 protobuf==3.20.3 tensorflow==2.16.1 tf-keras==2.16.0
 ```
 
-3. Nhấn `q` để thoát
+## 💻 Sử dụng
 
-## Cấu trúc thư mục
+### Thêm ảnh tham chiếu
 
+Thêm ảnh khuôn mặt vào thư mục `known_faces/`:
+
+**Cách 1: Một ảnh cho mỗi người**
 ```
-face_attendance_system/
-├── face_recognition_attendance.py  # File chính
-├── requirements.txt                # Thư viện cần thiết
-├── known_faces/                    # Thư mục chứa ảnh
-│   ├── Person1/
-│   │   ├── image1.jpg
-│   │   └── image2.jpg
-│   └── Person2/
-│       └── image1.jpg
-├── attendance.csv                  # File điểm danh (tự động tạo)
-└── face_embeddings.pkl            # Cache dữ liệu (tự động tạo)
+known_faces/
+├── NguyenVanA.jpg
+├── TranThiB.jpg
+└── LeVanC.jpg
 ```
 
-## Lưu ý
+**Cách 2: Nhiều ảnh cho mỗi người (KHUYẾN NGHỊ)**
+```
+known_faces/
+├── NguyenVanA.jpg
+├── NguyenVanA_1.jpg      # Với tóc khác
+├── NguyenVanA_2.jpg      # Với kính
+├── TranThiB.jpg
+└── TranThiB_1.jpg
+```
 
-- Ảnh nên rõ nét, ánh sáng đủ
-- Mỗi người nên có 2-5 ảnh từ nhiều góc độ
-- File `attendance.csv` sẽ tự động tạo khi có người được nhận diện
+### Chạy hệ thống
 
-## License
+**Cách 1: Sử dụng script (ĐƠN GIẢN NHẤT)**
 
-MIT License
+*Windows:*
+```cmd
+run.bat
+```
+
+*Linux/Mac:*
+```bash
+chmod +x run.sh
+./run.sh
+```
+
+**Cách 2: Chạy trực tiếp**
+
+*Sau khi activate virtual environment:*
+```bash
+python face_recognition_with_blink.py
+```
+
+

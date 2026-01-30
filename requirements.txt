@@ -1,5 +1,17 @@
-opencv-python
+# Core dependencies
 deepface
+opencv-contrib-python
 numpy
-tf-keras
+scipy
 pillow
+
+# MediaPipe and TensorFlow - SPECIFIC VERSIONS REQUIRED
+mediapipe==0.10.9
+protobuf==3.20.3
+tensorflow==2.16.1
+tf-keras==2.16.0
+
+# Note: These specific versions are required to avoid conflicts
+# - mediapipe 0.10.9 requires protobuf <4
+# - tensorflow 2.16.1 is compatible with protobuf 3.20.3
+# - Do not upgrade without testing compatibility
